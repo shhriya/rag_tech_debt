@@ -29,6 +29,19 @@ jobs:
         pip install flake8
         flake8 app --ignore=E501,W503
 
+    - name: Run FastAPI server
+      run: |
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+        # Wait until the server is up
+        for i in {1..10}; do
+          echo "Checking if server is up... attempt $i"
+          curl -s http://127.0.0.1:8000/docs > /dev/null && break
+          sleep 2
+        done
+        # Check again (fail if not up)
+        curl http://127.0.0.1:8000/docs
+    
+
     - name: 🧪 Run basic server test
       run: |
         uvicorn app.main:app --host 0.0.0.0 --port 8000 &
