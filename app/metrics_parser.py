@@ -1,7 +1,10 @@
 import os
 import pdfplumber
 
-PDF_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "The_Technical_Debt_Dataset.pdf")
+PDF_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)), "data", "The_Technical_Debt_Dataset.pdf"
+)
+
 
 def extract_metrics():
     metrics = {}
@@ -31,11 +34,12 @@ def extract_metrics():
                             metrics[name] = {
                                 "refactorings": numeric_values[3],
                                 "code_smells": numeric_values[4],
-                                "faults": numeric_values[5]
+                                "faults": numeric_values[5],
                             }
                     except Exception as e:
                         print(f"⚠️ Failed to parse line: '{line}' - {e}")
     return metrics
+
 
 def extract_raw_text_lines():
     print("\n Debugging PDF Text Extraction:\n")
@@ -43,6 +47,7 @@ def extract_raw_text_lines():
         for page_num, page in enumerate(pdf.pages):
             print(f"\n📄 Page {page_num + 1}:")
             print(page.extract_text())
+
 
 if __name__ == "__main__":
     print("Testing metric extraction...\n")

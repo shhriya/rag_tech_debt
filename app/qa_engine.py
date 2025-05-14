@@ -8,8 +8,11 @@ from langchain.chains import RetrievalQA
 
 load_dotenv()
 
-PDF_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "The_Technical_Debt_Dataset.pdf")
+PDF_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)), "data", "The_Technical_Debt_Dataset.pdf"
+)
 CHROMA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vectorstore")
+
 
 def load_pdf_text(path):
     text_chunks = []
@@ -24,6 +27,7 @@ def load_pdf_text(path):
                 print(f"No text found on page {i + 1}")
     return "\n".join(text_chunks)
 
+
 def get_or_create_vectorstore():
     print(" Rebuilding vectorstore from scratch...")
 
@@ -36,14 +40,18 @@ def get_or_create_vectorstore():
     print(f" Loaded {len(docs)} chunks")
 
     embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vectordb = Chroma.from_documents(docs, embedding_model, persist_directory=CHROMA_DIR)
+    vectordb = Chroma.from_documents(
+        docs, embedding_model, persist_directory=CHROMA_DIR
+    )
     vectordb.persist()
     return vectordb
+
 
 def get_qa_chain():
     retriever = get_or_create_vectorstore().as_retriever()
     llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
     return RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+
 
 class TechDebtQnA:
     def __init__(self):
@@ -51,32 +59,6 @@ class TechDebtQnA:
 
     def answer_question(self, question: str) -> str:
         return self.chain.invoke({"query": question})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # import os
@@ -108,7 +90,7 @@ class TechDebtQnA:
 
 # def get_or_create_vectorstore():
 #     print(" Rebuilding vectorstore from scratch...")
-    
+
 #     raw_text = load_pdf_text(PDF_PATH)
 #     if not raw_text.strip():
 #         raise ValueError("PDF text is empty! Nothing to embed.")
@@ -121,7 +103,6 @@ class TechDebtQnA:
 #     vectordb = Chroma.from_documents(docs, embedding_model, persist_directory=CHROMA_DIR)
 #     vectordb.persist()
 #     return vectordb
-
 
 
 # def get_qa_chain():

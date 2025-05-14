@@ -14,6 +14,7 @@ extract_raw_text_lines()
 class QueryRequest(BaseModel):
     question: str
 
+
 @app.post("/ask_tech_debt")
 def ask_tech_debt(req: QueryRequest):
     answer = qa_engine.answer_question(req.question)
@@ -30,25 +31,10 @@ def get_project_metrics(project_name: str):
 
     return {"error": f"No metrics found for project '{project_name}'"}
 
+
 @app.get("/project_names")
 def list_project_names():
     return {"projects": list(metrics_cache.keys())}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # from fastapi import FastAPI
