@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+langchain
+pdfplumber
+chromadb
+tiktoken
+google-generativeai
+langchain-google-genai
+langchain-community
+python-dotenv
+
+
+# What are the tools used to collect data?
+# Give all the details in project accumulo
