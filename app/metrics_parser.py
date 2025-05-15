@@ -54,7 +54,8 @@
 import os
 import pdfplumber
 
-PDF_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "The_Technical_Debt_Dataset.pdf")
+PDF_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "The_Technical_Debt_Dataset.pdf")
+PDF_PATH = os.path.abspath(PDF_PATH)
 
 
 def extract_metrics():

@@ -70,9 +70,9 @@ from langchain.chains import RetrievalQA
 
 load_dotenv()
 
-PDF_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "data", "The_Technical_Debt_Dataset.pdf"
-)
+PDF_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "The_Technical_Debt_Dataset.pdf")
+PDF_PATH = os.path.abspath(PDF_PATH)
+
 CHROMA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vectorstore")
 
 

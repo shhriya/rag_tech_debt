@@ -29,10 +29,11 @@ jobs:
         pip install flake8
         flake8 app --ignore=E501,W503
 
-    - name: 🔍 Check PDF exists
+    - name: 🔍 Check if PDF file exists
       run: |
-        echo "Checking PDF at app/data/The_Technical_Debt_Dataset.pdf"
-        ls -l app/data || true
+        echo "Checking PDF at data/The_Technical_Debt_Dataset.pdf"
+        ls -l data/The_Technical_Debt_Dataset.pdf
+
 
     - name: 🧪 Run FastAPI server test
       run: |
