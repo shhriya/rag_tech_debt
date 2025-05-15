@@ -51,8 +51,6 @@
 #     for project, data in result.items():
 #         print(f"{project}: {data}")
 
-
-
 import os
 import pdfplumber
 
