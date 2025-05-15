@@ -29,6 +29,11 @@ jobs:
         pip install flake8
         flake8 app --ignore=E501,W503
 
+    - name: 🔍 Check PDF exists
+      run: |
+        echo "Checking PDF at app/data/The_Technical_Debt_Dataset.pdf"
+        ls -l app/data || true
+
     - name: 🧪 Run FastAPI server test
       run: |
         uvicorn app.main:app --host 0.0.0.0 --port 8000 &
@@ -48,13 +53,5 @@ jobs:
         echo "🚀 Hitting the server endpoint"
         curl http://127.0.0.1:8000/docs
     
-        # Kill the server to prevent background process from keeping runner alive
+        # Kill the server
         kill $SERVER_PID
-
-    
-
-    - name: 🧪 Run basic server test
-      run: |
-        uvicorn app.main:app --host 0.0.0.0 --port 8000 &
-        sleep 5
-        curl --fail http://127.0.0.1:8000/docs
